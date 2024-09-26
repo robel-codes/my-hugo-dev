@@ -1,0 +1,21 @@
+baseURL = "https://robel-codes.github.io/my-hugo-dev/"
+languageCode = "en-us"
+title = "My Hugo Dev Site"
+theme = "relearn"
+enableRobotsTXT = false
+disableKinds = ["RSS", "sitemap"]
+buildDrafts = true  # Build drafts in development
+
+[params]
+  # Any custom parameters specific to your development environment
+  showEditButton = true
+  debug = true
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true  # Allows HTML in markdown for dev environment
+
+[server]
+  # Port for local development server
+  port = 1313
