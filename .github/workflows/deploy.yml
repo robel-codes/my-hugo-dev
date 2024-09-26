@@ -76,17 +76,19 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
       - name: Push changes to production
         run: |
-          git remote add prod https://github.com/robel-codes/my-hugo-prod.git
+          git remote add prod https://robel-codes:${{ secrets.PROD_REPO_ACCESS_TOKEN }}@github.com/robel-codes/my-hugo-prod.git
           git push prod main
-      - name: Create pull request from dev to prod
-        uses: peter-evans/create-pull-request@v5
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Dev to Prod sync"
-          branch: "main"
-          title: "Sync from Development to Production"
-          body: "Automated PR for syncing development changes to production."
-          base: "main"
-          head: "dev-sync"
+          token: ${{ secrets.PROD_REPO_ACCESS_TOKEN }}
+          base: main
+          head: main
+          title: "Update from Dev"
+          body: "Automated pull request from dev repository."
