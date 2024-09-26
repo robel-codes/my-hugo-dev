@@ -85,7 +85,7 @@ jobs:
           echo "Adding remote for production repository"
           git remote add prod https://robel-codes:${{ secrets.PROD_REPO_ACCESS_TOKEN }}@github.com/robel-codes/my-hugo-prod.git
           echo "Pushing changes to production"
-          git push prod main || { echo "Push failed"; exit 1; }
+          git push prod main --force || { echo "Push failed"; exit 1; }
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
